@@ -1,7 +1,7 @@
 <div style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto;">
 
-<h1 align="center" style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">Учебная практика УП.04</h1>
-<h2 align="center" style="color: #3498db;">«Сопровождение и обслуживание программного обеспечения компьютерных систем»</h2>
+<h1 align="center" style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">Учебная практика </h1>
+<h2 align="center" style="color: #3498db;">«УП.04 Сопровождение и обслуживание программного обеспечения компьютерных систем»</h2>
 
 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
 <h3 style="color: #2c3e50; margin-top: 0;">1. Первичная установка и настройка Zabbix</h3>
