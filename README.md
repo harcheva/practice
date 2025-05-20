@@ -24,10 +24,10 @@
 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
 <h3 style="color: #2c3e50; margin-top: 0;">2. Агентный мониторинг ОС Windows</h3>
 
-<h4 style="color: #3498db;">2.1 Подготовка</h4>
+<h4 style="color: #3498db;">1 Подготовка</h4>
 <p>В качестве объекта мониторинга будет использована ОС Windows, установленная на виртуальной машине и введенная в домен.</p>
 
-<h4 style="color: #3498db;">2.2 Установка агента</h4>
+<h4 style="color: #3498db;">2 Установка агента</h4>
 <p>Скачать <a href="https://cdn.zabbix.com/zabbix/binaries/stable/6.4/6.4.21/" target="_blank">исходный код агента</a> с официального сайта проекта и установить Zabbix Agent в ОС Windows.</p>
 
 <h4 style="color: #3498db;">3. Создание узла сети</h4>
