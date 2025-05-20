@@ -24,6 +24,7 @@
 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
 <h3 style="color: #2c3e50; margin-top: 0;">День 2. Агентный мониторинг ОС Windows</h3>
 
+<ol>
 <h4 style="color: #3498db;">1. Подготовка</h4>
 <p>В качестве объекта мониторинга будет использована ОС Windows, установленная на виртуальной машине и введенная в домен.</p>
 
@@ -62,6 +63,7 @@
 </div>
 
 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+</ol>
 <h3 style="color: #2c3e50; margin-top: 0;">День 3. Агентный мониторинг ОС Linux</h3>
 
 <h4 style="color: #3498db;">1. Подготовка</h4>
