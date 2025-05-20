@@ -64,13 +64,13 @@
 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
 <h3 style="color: #2c3e50; margin-top: 0;">День 3. Агентный мониторинг ОС Linux</h3>
 
-<h4 style="color: #3498db;">1 Подготовка</h4>
+<h4 style="color: #3498db;">1. Подготовка</h4>
 <p>Объект мониторинга - виртуальная машина с ОС РЕД ОС и установленным Zabbix-сервером.</p>
 
-<h4 style="color: #3498db;">2 Установка агента</h4>
+<h4 style="color: #3498db;">2. Установка агента</h4>
 <p>Установить Zabbix Agent (если не установлен).</p>
 
-<h4 style="color: #3498db;">3 Создание узла сети</h4>
+<h4 style="color: #3498db;">3. Создание узла сети</h4>
 <ol>
 <li>Создать шаблон опроса <strong>Agent Linux Monitor</strong></li>
 <li>Создать узел сети <code>[fam_stud].linux.home</code> (IP: 127.0.0.1)</li>
