@@ -4,7 +4,7 @@
 <h2 align="center" style="color: #3498db;">«УП.04 Сопровождение и обслуживание программного обеспечения компьютерных систем»</h2>
 
 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-<h3 style="color: #2c3e50; margin-top: 0;">1. Первичная установка и настройка Zabbix</h3>
+<h3 style="color: #2c3e50; margin-top: 0;">День 1. Первичная установка и настройка Zabbix</h3>
 
 <ol>
 <li>В VM VirtualBox установить и правильно настроить ОС РЕД ОС, создать пользователя <code>user/user</code> (логин/пароль)</li>
