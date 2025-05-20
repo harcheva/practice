@@ -8,7 +8,7 @@
 
 <ol>
 <h4 style="color: #3498db;">1. В VM VirtualBox установить и правильно настроить ОС РЕД ОС, создать пользователя <code>user/user</code> (логин/пароль)</h4>
-<h4 style="color: #3498db;">2. Выполнить настройку сервера на MySQL и Zabbix 6.4 с помощью <a href="https://redos.red-soft.ru/base/redos-8_0/8_0-administation/8_0-monitoring/8_0-zabbix/8_0-zabbix64-mysql/" target="_blank">официальной инструкции</a></h4>:
+<h4 style="color: #3498db;">2. Выполнить настройку сервера на MySQL и Zabbix 6.4 с помощью <a href="https://redos.red-soft.ru/base/redos-8_0/8_0-administation/8_0-monitoring/8_0-zabbix/8_0-zabbix64-mysql/" target="_blank">официальной инструкции</h4>:
     <ul>
     <li>Предварительная подготовка сервера</li>
     <li>Настройка сервера на MySQL</li>
