@@ -91,6 +91,123 @@
 </ol>
 </div>
 
+
+<h3 style="color: #2c3e50; margin-top: 0;">День 4. Мониторинг MySQL через Zabbix-агент и внешний скрипт</h3>
+
+<ol>
+<li><strong>Настройка Zabbix-агента для доступа к MySQL</strong>
+    <ul>
+    <li>Проверить <code>/etc/zabbix/zabbix_agentd.conf</code>: строка <code>Include=/etc/zabbix/zabbix_agentd.d/*.conf</code></li>
+    <li>Создать <code>/var/lib/zabbix/.my.cnf</code>:</li>
+    </ul>
+    <pre>client
+user = agent
+password = agent</pre>
+    <ul><li>Перезапустить агента: <code>sudo systemctl restart zabbix-agent</code></li></ul>
+</li>
+
+<li><strong>Создание пользователя MySQL для мониторинга</strong>
+    <ul>
+    <li><code>mysql -uroot -proot</code></li>
+    <li><code>CREATE USER 'agent'@'localhost' IDENTIFIED BY 'agent';</code></li>
+    <li><code>GRANT SELECT ON *.* TO 'agent'@'localhost';</code></li>
+    <li><code>FLUSH PRIVILEGES;</code></li>
+    </ul>
+</li>
+
+<li><strong>Создание шаблона и узла сети</strong>
+    <ul>
+    <li>Шаблон: <strong>User MySQL Monitor</strong> (группа User Templates)</li>
+    <li>Узел: <code>[fam_stud].mysql.home</code> (IP 127.0.0.1), группа Agent Monitoring Servers</li>
+    <li>Присоединить шаблон к узлу</li>
+    </ul>
+</li>
+
+<li><strong>Элементы данных (Zabbix-агент)</strong>
+    <ul>
+    <li><code>mysql.ping</code> — доступность БД (30 сек)</li>
+    <li><code>mysql.version</code> — версия (1 час)</li>
+    <li><code>mysql.status[Uptime]</code> — время работы (60 сек)</li>
+    <li><code>mysql.status[Queries]</code> — кол-во запросов (60 сек)</li>
+    <li><code>mysql.status[Slow_queries]</code> — медленные запросы (60 сек)</li>
+    <li><code>mysql.status[Threads_connected]</code> — открыто соединений (60 сек)</li>
+    </ul>
+</li>
+
+<li><strong>Триггеры</strong>
+    <ul>
+    <li>Недоступность MySQL: <code>{User MySQL Monitor:mysql.ping.last()}=0</code> (Высокая)</li>
+    <li>Много медленных запросов: <code>{User MySQL Monitor:mysql.status[Slow_queries].min(5m)}>10</code> (Средняя)</li>
+    </ul>
+</li>
+
+<li><strong>Графики</strong>
+    <ul>
+    <li>Активность запросов (Queries + Slow_queries)</li>
+    <li>Загрузка соединений (Threads_connected)</li>
+    </ul>
+</li>
+
+<li><strong>Внешний скрипт на Perl (размер БД)</strong>
+    <ul>
+    <li>Установить модули: <code>sudo apt-get install libdbi-perl libdbd-mysql-perl</code></li>
+    <li>Создать <code>/usr/lib/zabbix/externalscripts/db_size.pl</code>:</li>
+    </ul>
+    <pre>
+#!/usr/bin/perl
+use DBI;
+my $dbh = DBI->connect("DBI:mysql:zabbix:localhost:3306", "agent", "agent");
+my $sth = $dbh->prepare("SELECT ROUND(SUM(data_length+index_length)/1024/1024,2) FROM information_schema.TABLES WHERE table_schema='zabbix'");
+$sth->execute();
+my ($size) = $sth->fetchrow_array();
+print $size;
+$dbh->disconnect();</pre>
+    <ul>
+    <li><code>sudo chmod +x /usr/lib/zabbix/externalscripts/db_size.pl</code></li>
+    <li>Проверить: <code>/usr/lib/zabbix/externalscripts/db_size.pl</code></li>
+    </ul>
+</li>
+
+<li><strong>Добавление внешней проверки в шаблон</strong>
+    <ul>
+    <li>Элемент данных: тип <strong>Внешняя проверка</strong>, ключ <code>db_size.pl</code></li>
+    <li>Тип информации: Числовой (целое), ед. изм. МБ, интервал 300 сек</li>
+    <li>Триггер: размер БД > 1024 МБ</li>
+    <li>График: динамика размера БД</li>
+    </ul>
+</li>
+
+<li><strong>Инвентарные данные</strong> (заполнить в узле)
+    <ul>
+    <li>Тип устройства: СУБД</li>
+    <li>ОС: <code>mysql.version</code></li>
+    <li>Время работы: <code>mysql.status[Uptime]</code></li>
+    <li>Размер БД: <code>db_size.pl</code></li>
+    </ul>
+</li>
+
+<li><strong>Комплексный экран MySQL Dashboard</strong>
+    <ul>
+    <li>Все графики + индикатор доступности + список проблем</li>
+    </ul>
+</li>
+</ol>
+
+<p><strong>Контрольные вопросы (письменно):</strong></p>
+<ul>
+<li>Чем отличается мониторинг через агент от внешней проверки?</li>
+<li>Для чего нужен файл <code>.my.cnf</code>?</li>
+<li>Что показывает параметр Slow_queries?</li>
+</ul>
+
+<p><strong>Отчёт (скриншоты):</strong> элементы данных, триггеры, графики, код скрипта, комплексный экран.</p>
+
+</div>
+
+<p style="text-align: center; color: #7f8c8d;">✧ День 4 ✧</p>
+
+</div>
+
 <div style="text-align: center; margin-top: 30px; font-style: italic; color: #7f8c8d;">
 <p>Материал подготовлен для учебной практики </p>
 <p>2025-2026</p>
