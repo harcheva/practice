@@ -92,7 +92,10 @@
 </div>
 
 
-<h3 style="color: #2c3e50; margin-top: 0;">День 4. Мониторинг MySQL через Zabbix-агент и внешний скрипт</h3>
+<div style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto;">
+
+<div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+<h3 style="color: #2c3e50; margin-top: 0;">День 4. Мониторинг MySQL через Zabbix-агент и внешний скрипт (Bash)</h3>
 
 <ol>
 <li><strong>Настройка Zabbix-агента для доступа к MySQL</strong>
@@ -100,7 +103,7 @@
     <li>Проверить <code>/etc/zabbix/zabbix_agentd.conf</code>: строка <code>Include=/etc/zabbix/zabbix_agentd.d/*.conf</code></li>
     <li>Создать <code>/var/lib/zabbix/.my.cnf</code>:</li>
     </ul>
-    <pre>client
+    <pre>[client]
 user = agent
 password = agent</pre>
     <ul><li>Перезапустить агента: <code>sudo systemctl restart zabbix-agent</code></li></ul>
@@ -192,14 +195,12 @@ mysql -u"$MYSQL_USER" -p"$MYSQL_PASS" -h"$MYSQL_HOST" -N -e "$QUERY" 2>/dev/null
     </ul>
 </li>
 
-
 <li><strong>Комплексный экран MySQL Dashboard</strong>
     <ul>
     <li>Все графики + индикатор доступности + список проблем</li>
     </ul>
 </li>
 </ol>
-
 </div>
 
 
