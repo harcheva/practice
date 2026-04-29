@@ -157,18 +157,15 @@ password = agent</pre>
     </ul>
     <pre>
 #!/bin/bash
-
 # Учётные данные
 MYSQL_USER="agent"
 MYSQL_PASS="agent"
 MYSQL_HOST="localhost"
 MYSQL_DB="zabbix"
-
 # SQL-запрос: размер базы данных в МБ
 QUERY="SELECT ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) 
        FROM information_schema.TABLES 
        WHERE table_schema = 'zabbix';"
-
 # Выполнение запроса
 mysql -u"$MYSQL_USER" -p"$MYSQL_PASS" -h"$MYSQL_HOST" -N -e "$QUERY" 2>/dev/null</pre>
     <ul>
