@@ -148,29 +148,35 @@ password = agent</pre>
     </ul>
 </li>
 
-<li><strong>Внешний скрипт на Perl (размер БД)</strong>
+<li><strong>Внешний скрипт на Bash (размер БД)</strong>
     <ul>
-    <li>Установить модули: <code>sudo apt-get install libdbi-perl libdbd-mysql-perl</code></li>
-    <li>Создать <code>/usr/lib/zabbix/externalscripts/db_size.pl</code>:</li>
+    <li>Создать <code>/usr/lib/zabbix/externalscripts/db_size.sh</code>:</li>
     </ul>
     <pre>
-#!/usr/bin/perl
-use DBI;
-my $dbh = DBI->connect("DBI:mysql:zabbix:localhost:3306", "agent", "agent");
-my $sth = $dbh->prepare("SELECT ROUND(SUM(data_length+index_length)/1024/1024,2) FROM information_schema.TABLES WHERE table_schema='zabbix'");
-$sth->execute();
-my ($size) = $sth->fetchrow_array();
-print $size;
-$dbh->disconnect();</pre>
+#!/bin/bash
+
+# Учётные данные
+MYSQL_USER="agent"
+MYSQL_PASS="agent"
+MYSQL_HOST="localhost"
+MYSQL_DB="zabbix"
+
+# SQL-запрос: размер базы данных в МБ
+QUERY="SELECT ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) 
+       FROM information_schema.TABLES 
+       WHERE table_schema = 'zabbix';"
+
+# Выполнение запроса
+mysql -u"$MYSQL_USER" -p"$MYSQL_PASS" -h"$MYSQL_HOST" -N -e "$QUERY" 2>/dev/null</pre>
     <ul>
-    <li><code>sudo chmod +x /usr/lib/zabbix/externalscripts/db_size.pl</code></li>
-    <li>Проверить: <code>/usr/lib/zabbix/externalscripts/db_size.pl</code></li>
+    <li>Выдать права: <code>sudo chmod +x /usr/lib/zabbix/externalscripts/db_size.sh</code></li>
+    <li>Проверить вручную: <code>/usr/lib/zabbix/externalscripts/db_size.sh</code></li>
     </ul>
 </li>
 
 <li><strong>Добавление внешней проверки в шаблон</strong>
     <ul>
-    <li>Элемент данных: тип <strong>Внешняя проверка</strong>, ключ <code>db_size.pl</code></li>
+    <li>Элемент данных: тип <strong>Внешняя проверка</strong>, ключ <code>db_size.sh</code></li>
     <li>Тип информации: Числовой (целое), ед. изм. МБ, интервал 300 сек</li>
     <li>Триггер: размер БД > 1024 МБ</li>
     <li>График: динамика размера БД</li>
@@ -182,9 +188,10 @@ $dbh->disconnect();</pre>
     <li>Тип устройства: СУБД</li>
     <li>ОС: <code>mysql.version</code></li>
     <li>Время работы: <code>mysql.status[Uptime]</code></li>
-    <li>Размер БД: <code>db_size.pl</code></li>
+    <li>Размер БД: <code>db_size.sh</code></li>
     </ul>
 </li>
+
 
 <li><strong>Комплексный экран MySQL Dashboard</strong>
     <ul>
