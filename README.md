@@ -195,7 +195,6 @@ $dbh->disconnect();</pre>
 
 </div>
 
-<p style="text-align: center; color: #7f8c8d;">✧ День 4 ✧</p>
 
 </div>
 
