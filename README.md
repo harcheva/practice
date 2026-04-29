@@ -93,7 +93,7 @@
 
 <div style="text-align: center; margin-top: 30px; font-style: italic; color: #7f8c8d;">
 <p>Материал подготовлен для учебной практики </p>
-<p>2024-2025</p>
+<p>2025-2026</p>
 </div>
 
 </div>
